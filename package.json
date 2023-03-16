@@ -1,0 +1,49 @@
+{
+  "name": "ghi-diem-tien-len",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "eslint": "eslint \"**/*.+(js|jsx|ts|tsx)\"",
+    "eslint:fix": "eslint --fix \"**/*.+(js|jsx|ts|tsx)\"",
+    "prettier": "prettier --check \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "prettier:fix": "prettier --write \"**/*.+(js|jsx|ts|tsx|json|yml|yaml|md|css)\"",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "eslint": "8.36.0",
+    "eslint-config-next": "13.2.4",
+    "evergreen-ui": "^7.1.4",
+    "lottie-react": "^2.4.0",
+    "next": "13.2.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "styled-components": "^5.3.9"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.14",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.24.2",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.25.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "lint-staged": "^11.1.2",
+    "postcss": "^8.4.21",
+    "prettier": "2.4.0",
+    "tailwindcss": "^3.2.7"
+  },
+  "lint-staged": {
+    "./*/**/*.{js,jsx,ts,tsx}": [
+      "npm run prettier:fix",
+      "npm run eslint:fix"
+    ],
+    "*.{json,md}": [
+      "npm run prettier:fix"
+    ]
+  }
+}
