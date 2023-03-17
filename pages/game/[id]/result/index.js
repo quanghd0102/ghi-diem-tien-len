@@ -14,7 +14,10 @@ import map from "lodash/map";
 import parseInt from "lodash/parseInt";
 import { v4 as uuidv4 } from "uuid";
 import Layout from "@/components/layout";
-import { setPlayersAndStartGame, setScore } from "../../../redux/game";
+import {
+  setPlayersAndStartGame,
+  setScoreAndNextGame,
+} from "../../../redux/game";
 import { selectCurrentScore } from "../../../redux/game/selector";
 
 const Game = () => {
@@ -44,7 +47,7 @@ const Game = () => {
 
     setIsInvalid(false);
     dispatch(
-      setScore({
+      setScoreAndNextGame({
         currentGame,
         score: [...listNewScore],
       })
