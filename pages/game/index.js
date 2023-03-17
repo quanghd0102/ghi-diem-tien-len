@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import find from "lodash/find";
 import { v4 as uuidv4 } from "uuid";
 import Layout from "@/components/layout";
-import { setPlayersAndStartGame } from "../redux/game";
+import { setPlayersAndStartGame, setGameId } from "../redux/game";
 
 const Game = () => {
   const router = useRouter();
@@ -18,9 +18,11 @@ const Game = () => {
       return;
     }
 
+    const gameId = uuidv4();
     setIsInvalid(false);
     dispatch(setPlayersAndStartGame(listPlayer));
-    router.push(`/game/${uuidv4()}`);
+    dispatch(setGameId(gameId));
+    router.push(`/game/${gameId}`);
   };
 
   const onSetPlayerName = (index) => (e) => {

@@ -24,6 +24,7 @@ const Game = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentGame = useSelector((state) => state.game.currentGame);
+  const gameId = useSelector((state) => state.game.gameId);
   const currentScore = useSelector((state) => selectCurrentScore(state));
   const [isInvalid, setIsInvalid] = useState(false);
   const [listNewScore, setListNewScore] = useState([...currentScore]);
@@ -40,7 +41,8 @@ const Game = () => {
   };
 
   const goToNextGame = () => {
-    if (!find(listNewScore, (score) => score.score === "")) {
+    console.log("listNewScore:", listNewScore);
+    if (find(listNewScore, (score) => score.score === "")) {
       setIsInvalid(true);
       return;
     }
@@ -52,6 +54,7 @@ const Game = () => {
         score: [...listNewScore],
       })
     );
+    router.push(`/game/${gameId}`);
   };
 
   return (
@@ -76,7 +79,11 @@ const Game = () => {
       <div>
         {listNewScore.map((score) => (
           <TextInputField
-            label="Người chơi "
+            label={
+              <>
+                Người chơi <Badge color={score.color}>${score.name}</Badge>
+              </>
+            }
             required
             value={score.score}
             onChange={onSetNewScore(score.id)}
@@ -84,7 +91,11 @@ const Game = () => {
         ))}
       </div>
       {isInvalid && (
-        <Alert intent="danger" title="Thiếu điểm của người chơi">
+        <Alert
+          intent="danger"
+          title="Thiếu điểm của người chơi"
+          marginBottom={20}
+        >
           Hãy nhập đủ điểm của các người chơi trước khi bắt đầu ván mới ^^
         </Alert>
       )}

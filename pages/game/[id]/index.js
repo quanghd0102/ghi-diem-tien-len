@@ -15,11 +15,12 @@ const GameDetail = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentGame = useSelector((state) => state.game.currentGame);
+  const gameId = useSelector((state) => state.game.gameId);
   const listPlayer = useSelector((state) => state.game.listPlayers);
   const [listWinner, setListWinner] = useState([]);
 
   useEffect(() => {
-    // if (!currentGame) router.push("/game");
+    if (!currentGame) router.push("/game");
   }, []);
 
   const onSetWinner = (playerId) => () => {
@@ -51,11 +52,12 @@ const GameDetail = () => {
         ],
       })
     );
+    router.push(`/game/${gameId}/result`);
   };
 
   return (
     <Layout>
-      {/* <Pane className="text-center">
+      <Pane className="text-center">
         <Heading size={600} marginTop={15} marginBottom={40}>
           Ván bài thứ{" "}
           <Badge
@@ -71,7 +73,7 @@ const GameDetail = () => {
             {currentGame === 1 ? "nhất" : currentGame}
           </Badge>
         </Heading>
-      </Pane> */}
+      </Pane>
       <div>
         <div className="grid grid-cols-2 gap-4 place-content-center h-full">
           {listPlayer.map((player) => (

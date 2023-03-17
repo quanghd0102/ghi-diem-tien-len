@@ -5,5 +5,5 @@ const selectListScore = (state) => state.game.listScores;
 export const selectCurrentScore = createSelector(
   selectCurrentGame,
   selectListScore,
-  (currentGame, listScore) => listScore[currentGame]
+  (currentGame, listScore) => listScore[currentGame] || []
 );

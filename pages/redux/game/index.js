@@ -13,6 +13,7 @@ const listColors = [
   "teal",
 ];
 const initialState = {
+  gameId: undefined,
   currentGame: 0,
   listScores: [],
   listPlayers: [],
@@ -26,6 +27,9 @@ export const gameSlice = createSlice({
     startGame: (state) => {
       state.isStarted = true;
       state.currentGame = 1;
+    },
+    setGameId: (state, { payload }) => {
+      state.gameId = payload;
     },
     goNextGame: (state) => {
       state.currentGame += 1;
@@ -55,6 +59,7 @@ export const gameSlice = createSlice({
 // Action creators are generated for each case reducer function
 export const {
   startGame,
+  setGameId,
   goNextGame,
   setPlayersAndStartGame,
   setScore,
