@@ -1,12 +1,32 @@
-import React from "react";
-import { Pane, Heading, TextInputField, Button } from "evergreen-ui";
+import React, { useState } from "react";
+import { Pane, Heading, TextInputField, Button, Alert } from "evergreen-ui";
 import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
+import find from "lodash/find";
+import { v4 as uuidv4 } from "uuid";
 import Layout from "@/components/layout";
+import { setPlayersAndStartGame } from "../redux/game";
 
 const Game = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const [listPlayer, setListPlayer] = useState([]);
+  const [isInvalid, setIsInvalid] = useState(false);
   const gotoNewGame = () => {
-    router.push("/game");
+    if (find(listPlayer, (player) => !player)) {
+      setIsInvalid(true);
+      return;
+    }
+
+    setIsInvalid(false);
+    dispatch(setPlayersAndStartGame(listPlayer));
+    router.push(`/game/${uuidv4()}`);
+  };
+
+  const onSetPlayerName = (index) => (e) => {
+    const newListPlayers = [...listPlayer];
+    newListPlayers[index] = e.target.value;
+    setListPlayer([...newListPlayers]);
   };
 
   return (
@@ -21,24 +41,37 @@ const Game = () => {
           label="Tên người chơi thứ nhất"
           required
           placeholder="Tên người thứ nhất"
+          value={listPlayer[0]}
+          onChange={onSetPlayerName(0)}
         />
         <TextInputField
           label="Tên người chơi thứ hai"
           required
-          placeholder="Tên người thứ nhất"
+          placeholder="Tên người thứ hai"
+          value={listPlayer[1]}
+          onChange={onSetPlayerName(1)}
         />
         <TextInputField
           label="Tên người chơi thứ ba"
           required
-          placeholder="Tên người thứ nhất"
+          placeholder="Tên người thứ ba"
+          value={listPlayer[2]}
+          onChange={onSetPlayerName(2)}
         />
         <TextInputField
           label="Tên người chơi thứ tư"
           required
-          placeholder="Tên người thứ nhất"
+          placeholder="Tên người thứ tư"
+          value={listPlayer[3]}
+          onChange={onSetPlayerName(3)}
         />
       </div>
-      <div>
+      {isInvalid && (
+        <Alert intent="danger" title="Chưa thể bắt đầu ván bài!">
+          Hãy nhập đủ tên các người chơi trước khi bắt đầu ^^
+        </Alert>
+      )}
+      <div className="m-auto text-center">
         <Button
           appearance="primary"
           intent="success"
