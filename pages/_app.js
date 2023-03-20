@@ -9,6 +9,16 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <link rel="shortcut icon" href="/favicon.png" />
+        <meta
+          name="description"
+          content="Tiến lên và ghi điểm 1 cách dễ dàng hơn"
+        />
+        <meta property="og:title" content="Tiến Lên Ghi Điểm" />
+        <meta
+          property="og:description"
+          content="Tiến lên và ghi điểm 1 cách dễ dàng hơn"
+        />
+        <meta property="og:image" content="/title.jpg" />
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
