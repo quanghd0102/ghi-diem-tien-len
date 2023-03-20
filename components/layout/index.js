@@ -1,10 +1,11 @@
 import React from "react";
+import titleImg from "../../assets/images/title.jpg";
 
 const Layout = ({ children, footer }) => (
   <div className="flex flex-col">
     <div className="w-28 m-auto">
       <img
-        src="https://imgur.com/a/o1PipDy"
+        src={titleImg.src}
         alt="Ghi điểm tiến lên"
         width={112}
         height={62}
