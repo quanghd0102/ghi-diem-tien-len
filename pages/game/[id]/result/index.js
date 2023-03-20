@@ -6,19 +6,16 @@ import {
   Button,
   Alert,
   Badge,
+  Dialog,
 } from "evergreen-ui";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import find from "lodash/find";
 import map from "lodash/map";
 import parseInt from "lodash/parseInt";
-import { v4 as uuidv4 } from "uuid";
 import Layout from "@/components/layout";
-import {
-  setPlayersAndStartGame,
-  setScoreAndNextGame,
-} from "../../../redux/game";
-import { selectCurrentScore } from "../../../redux/game/selector";
+import { setScoreAndNextGame } from "../../../../redux/game";
+import { selectCurrentScore } from "../../../../redux/game/selector";
 
 const Game = () => {
   const router = useRouter();
@@ -28,20 +25,20 @@ const Game = () => {
   const currentScore = useSelector((state) => selectCurrentScore(state));
   const [isInvalid, setIsInvalid] = useState(false);
   const [listNewScore, setListNewScore] = useState([...currentScore]);
+  const [isShown, setIsShown] = useState(false);
 
   const onSetNewScore = (playerId) => (e) => {
     const { value } = e.target;
     setListNewScore(
       map(listNewScore, (data) =>
         data.id === playerId
-          ? { ...data, score: value === "" ? value : parseInt(value) }
+          ? { ...data, score: value === ("" || "-") ? value : parseInt(value) }
           : data
       )
     );
   };
 
-  const goToNextGame = () => {
-    console.log("listNewScore:", listNewScore);
+  const setScoreToRedux = () => {
     if (find(listNewScore, (score) => score.score === "")) {
       setIsInvalid(true);
       return;
@@ -54,7 +51,21 @@ const Game = () => {
         score: [...listNewScore],
       })
     );
+  };
+
+  const goToNextGame = () => {
+    setScoreToRedux();
     router.push(`/game/${gameId}`);
+  };
+
+  const confirmEndGame = () => {
+    setIsShown(true);
+  };
+
+  const goToEndGame = () => {
+    setIsShown(false);
+    setScoreToRedux();
+    router.push(`/game/${gameId}/summary`);
   };
 
   return (
@@ -75,13 +86,36 @@ const Game = () => {
             {currentGame === 1 ? "nhất" : currentGame}
           </Badge>
         </Heading>
+
+        <Dialog
+          isShown={isShown}
+          title="Kết thúc cuộc chơi"
+          intent="danger"
+          onCloseComplete={goToEndGame}
+          confirmLabel="Chắc chắn"
+          cancelLabel="Không"
+        >
+          Bạn có chắc chắn muốn kết thúc cuộc chơi tại ván bài thứ
+          <Badge
+            display="inline-flex"
+            color="red"
+            marginLeft={5}
+            marginTop={-2}
+          >
+            {currentGame === 1 ? "nhất" : currentGame}
+          </Badge>
+          ?
+        </Dialog>
       </Pane>
       <div>
         {listNewScore.map((score) => (
           <TextInputField
             label={
               <>
-                Người chơi <Badge color={score.color}>${score.name}</Badge>
+                Người chơi{" "}
+                <Badge color={score.color} marginTop={-2}>
+                  {score.name}
+                </Badge>
               </>
             }
             required
@@ -100,6 +134,15 @@ const Game = () => {
         </Alert>
       )}
       <div className="m-auto text-center">
+        <Button
+          intent="danger"
+          marginTop={15}
+          marginBottom={25}
+          width={250}
+          onClick={confirmEndGame}
+        >
+          Kết thúc cuộc chơi
+        </Button>
         <Button
           appearance="primary"
           intent="success"

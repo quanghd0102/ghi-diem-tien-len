@@ -53,6 +53,7 @@ export const gameSlice = createSlice({
         payload.score;
       state.currentGame += 1;
     },
+    resetGame: () => initialState,
   },
 });
 
@@ -64,6 +65,7 @@ export const {
   setPlayersAndStartGame,
   setScore,
   setScoreAndNextGame,
+  resetGame,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;

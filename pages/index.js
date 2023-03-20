@@ -26,8 +26,8 @@ export default function Home() {
           <div className="text-center mb-12">
             <Lottie
               animationData={logoAnimation}
-              loop
               style={{ height: 200 }}
+              loop={false}
             />
             <Image
               src={titleImg}

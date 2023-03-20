@@ -7,7 +7,7 @@ import find from "lodash/find";
 import filter from "lodash/filter";
 import map from "lodash/map";
 import Layout from "@/components/layout";
-import { setScore } from "../../redux/game";
+import { setScore } from "../../../redux/game";
 
 const highestScore = 3;
 
