@@ -90,7 +90,7 @@ const GameDetail = () => {
       <div className="m-auto text-center">
         <Pane>
           <Heading size={100} marginTop={40} marginBottom={15}>
-            Cảm ơn bạn đã dùng trang web của mình
+            Made by QuangHD with love
             <div className="flex justify-center mt-[10px]">
               <HeartIcon color="danger" marginRight={4} marginLeft={4} />
               <HeartIcon color="danger" marginRight={4} marginLeft={4} />
