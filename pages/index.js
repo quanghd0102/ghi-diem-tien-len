@@ -30,8 +30,10 @@ export default function Home() {
               loop={false}
             />
             <Image
-              src={titleImg}
+              src={titleImg.src}
               alt="Ghi điểm tiến lên"
+              width={240}
+              height={135}
               className="w-60 m-auto"
             />
             <Button

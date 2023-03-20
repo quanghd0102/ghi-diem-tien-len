@@ -5,7 +5,13 @@ import titleImg from "@/assets/images/title.jpg";
 const Layout = ({ children, footer }) => (
   <div className="flex flex-col">
     <div className="w-28 m-auto">
-      <Image src={titleImg} alt="Ghi điểm tiến lên" className="w-full m-auto" />
+      <Image
+        src={titleImg.src}
+        alt="Ghi điểm tiến lên"
+        width={112}
+        height={62}
+        className="w-full m-auto"
+      />
     </div>
     <div className="px-4 flex-1">{children}</div>
     {footer && <div>{footer}</div>}
