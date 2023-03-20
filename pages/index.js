@@ -4,7 +4,7 @@ import Lottie from "lottie-react";
 import { Button } from "evergreen-ui";
 import { useRouter } from "next/navigation";
 
-import logoAnimation from "@/assets/lottie-files/logo.json";
+import logoAnimation from "../assets/lottie-files/logo.json";
 import titleImg from "@/assets/images/title.jpg";
 
 export default function Home() {
@@ -30,7 +30,7 @@ export default function Home() {
               loop={false}
             />
             <Image
-              src={titleImg.src}
+              src={titleImg}
               alt="Ghi điểm tiến lên"
               width={240}
               height={135}
