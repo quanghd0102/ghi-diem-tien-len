@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Lottie from "lottie-react";
 import { Button } from "evergreen-ui";
 import { useRouter } from "next/navigation";
@@ -28,7 +27,7 @@ export default function Home() {
               style={{ height: 200 }}
               loop={false}
             />
-            <Image
+            <img
               src="https://imgur.com/a/o1PipDy"
               alt="Ghi điểm tiến lên"
               width={240}
