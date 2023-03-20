@@ -12,7 +12,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-          <div className="min-h-[896px]">
+          <div className="min-h-[768px] max-w-xl m-auto">
             <Component {...pageProps} />
           </div>
         </PersistGate>

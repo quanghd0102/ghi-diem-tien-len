@@ -91,7 +91,7 @@ const Game = () => {
           isShown={isShown}
           title="Kết thúc cuộc chơi"
           intent="danger"
-          onCloseComplete={goToEndGame}
+          onConfirm={goToEndGame}
           confirmLabel="Chắc chắn"
           cancelLabel="Không"
         >
@@ -133,7 +133,7 @@ const Game = () => {
           Hãy nhập đủ điểm của các người chơi trước khi bắt đầu ván mới ^^
         </Alert>
       )}
-      <div className="m-auto text-center">
+      <div className="m-auto text-center flex flex-col justify-center items-center">
         <Button
           intent="danger"
           marginTop={15}

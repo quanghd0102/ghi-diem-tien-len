@@ -2,7 +2,7 @@ import React from "react";
 import titleImg from "../../assets/images/title.jpg";
 
 const Layout = ({ children, footer }) => (
-  <div className="flex flex-col">
+  <div className="flex flex-col pb-[15px]">
     <div className="w-28 m-auto">
       <img
         src={titleImg.src}

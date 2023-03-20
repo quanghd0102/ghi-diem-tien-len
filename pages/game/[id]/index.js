@@ -103,7 +103,7 @@ const GameDetail = () => {
           ))}
         </div>
       </div>
-      <div className="m-auto text-center">
+      <div className="m-auto text-center flex flex-col justify-center items-center">
         <Pane>
           <Heading size={100} marginTop={40} marginBottom={15}>
             Hãy chọn tên người chơi theo thứ tự thắng cuộc

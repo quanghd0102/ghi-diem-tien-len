@@ -55,6 +55,7 @@ const GameDetail = () => {
                   alignItems: "center",
                   justifyContent: "center",
                   fontSize: "30px",
+                  minHeight: "135px",
                 }}
                 onClick={onSetWinner(player.id)}
               >
