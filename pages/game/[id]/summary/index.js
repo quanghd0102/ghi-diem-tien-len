@@ -12,7 +12,7 @@ import icon2nd from "@/assets/lottie-files/2nd.json";
 import icon3rd from "@/assets/lottie-files/3rd.json";
 import iconLoser from "@/assets/lottie-files/loser.json";
 
-const GameDetail = () => {
+const GameSummary = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const currentGame = useSelector((state) => state.game.currentGame);
@@ -45,7 +45,7 @@ const GameDetail = () => {
       <div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-[50px] place-content-center h-full">
           {summaryScore.map((player, index) => (
-            <div className="relative">
+            <div className="relative" key={player.id}>
               <Badge
                 color={player.color}
                 className="bg-blend-lighten hover:bg-blend-darken"
@@ -111,4 +111,4 @@ const GameDetail = () => {
   );
 };
 
-export default GameDetail;
+export default GameSummary;

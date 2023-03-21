@@ -128,6 +128,7 @@ const Game = () => {
             required
             value={score.score}
             onChange={onSetNewScore(score.id)}
+            key={score.id}
           />
         ))}
       </div>

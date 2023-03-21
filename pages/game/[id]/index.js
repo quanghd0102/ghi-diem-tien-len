@@ -77,7 +77,7 @@ const GameDetail = () => {
       <div>
         <div className="grid grid-cols-2 gap-4 place-content-center h-full">
           {listPlayer.map((player) => (
-            <div className="relative">
+            <div className="relative" key={player.id}>
               {findIndex(listWinner, (item) => item === player.id) !== -1 && (
                 <div className="w-full h-full flex absolute justify-center items-center backdrop-brightness-50">
                   <span className="text-white text-6xl w-1/2 text-center">
