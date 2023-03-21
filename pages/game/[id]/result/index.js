@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { createRef, useState } from "react";
 import {
   Pane,
   Heading,
@@ -10,6 +10,7 @@ import {
 } from "evergreen-ui";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
+import { useScreenshot, createFileName } from "use-react-screenshot";
 import find from "lodash/find";
 import map from "lodash/map";
 import toSafeInteger from "lodash/toSafeInteger";
@@ -26,6 +27,21 @@ const Game = () => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [listNewScore, setListNewScore] = useState([...currentScore]);
   const [isShown, setIsShown] = useState(false);
+  const ref = createRef(null);
+  // eslint-disable-next-line no-unused-vars
+  const [image, takeScreenShot] = useScreenshot({
+    type: "image/jpeg",
+    quality: 1.0,
+  });
+
+  const download = (img) => {
+    const a = document.createElement("a");
+    a.href = img;
+    a.download = createFileName("jpg", `ván-${currentGame}`);
+    a.click();
+  };
+
+  const downloadScreenshot = () => takeScreenShot(ref.current).then(download);
 
   const onSetNewScore = (playerId) => (e) => {
     const { value } = e.target;
@@ -52,6 +68,7 @@ const Game = () => {
         })),
       })
     );
+    downloadScreenshot();
   };
 
   const goToNextGame = () => {
@@ -113,7 +130,7 @@ const Game = () => {
           ?
         </Dialog>
       </Pane>
-      <div>
+      <div ref={ref}>
         {listNewScore.map((score) => (
           <TextInputField
             label={
