@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { Pane, Heading, TextInputField, Button, Alert } from "evergreen-ui";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import find from "lodash/find";
+import compact from "lodash/compact";
+import map from "lodash/map";
+import trim from "lodash/trim";
 import { v4 as uuidv4 } from "uuid";
 import Layout from "@/components/layout";
 import { setPlayersAndStartGame, setGameId } from "../../redux/game";
@@ -13,14 +15,15 @@ const Game = () => {
   const [listPlayer, setListPlayer] = useState([]);
   const [isInvalid, setIsInvalid] = useState(false);
   const gotoNewGame = () => {
-    if (find(listPlayer, (player) => !player)) {
+    const listNewPlayer = compact(map(listPlayer, trim));
+    if (listNewPlayer.length < 4) {
       setIsInvalid(true);
       return;
     }
 
     const gameId = uuidv4();
     setIsInvalid(false);
-    dispatch(setPlayersAndStartGame(listPlayer));
+    dispatch(setPlayersAndStartGame(listNewPlayer));
     dispatch(setGameId(gameId));
     router.push(`/game/${gameId}`);
   };
@@ -69,7 +72,11 @@ const Game = () => {
         />
       </div>
       {isInvalid && (
-        <Alert intent="danger" title="Chưa thể bắt đầu ván bài!">
+        <Alert
+          intent="danger"
+          title="Chưa thể bắt đầu ván bài!"
+          marginBottom={15}
+        >
           Hãy nhập đủ tên các người chơi trước khi bắt đầu ^^
         </Alert>
       )}
