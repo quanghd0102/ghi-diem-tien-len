@@ -62,6 +62,10 @@ const Game = () => {
     setIsShown(true);
   };
 
+  const cancelDialog = () => {
+    setIsShown(false);
+  };
+
   const goToEndGame = () => {
     setIsShown(false);
     setScoreToRedux();
@@ -92,6 +96,7 @@ const Game = () => {
           title="Kết thúc cuộc chơi"
           intent="danger"
           onConfirm={goToEndGame}
+          onCancel={cancelDialog}
           confirmLabel="Chắc chắn"
           cancelLabel="Không"
         >
