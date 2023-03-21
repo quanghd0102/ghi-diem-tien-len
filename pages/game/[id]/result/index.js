@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import find from "lodash/find";
 import map from "lodash/map";
-import parseInt from "lodash/parseInt";
+import toSafeInteger from "lodash/toSafeInteger";
 import Layout from "@/components/layout";
 import { setScoreAndNextGame } from "../../../../redux/game";
 import { selectCurrentScore } from "../../../../redux/game/selector";
@@ -31,9 +31,7 @@ const Game = () => {
     const { value } = e.target;
     setListNewScore(
       map(listNewScore, (data) =>
-        data.id === playerId
-          ? { ...data, score: value === ("" || "-") ? value : parseInt(value) }
-          : data
+        data.id === playerId ? { ...data, score: value } : data
       )
     );
   };
@@ -48,7 +46,10 @@ const Game = () => {
     dispatch(
       setScoreAndNextGame({
         currentGame,
-        score: [...listNewScore],
+        score: map(listNewScore, (data) => ({
+          ...data,
+          score: toSafeInteger(data.score),
+        })),
       })
     );
   };
@@ -123,6 +124,7 @@ const Game = () => {
                 </Badge>
               </>
             }
+            type="number"
             required
             value={score.score}
             onChange={onSetNewScore(score.id)}

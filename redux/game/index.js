@@ -45,12 +45,14 @@ export const gameSlice = createSlice({
       state.currentGame = 1;
     },
     setScore: (state, { payload }) => {
-      state.listScores[payload.currentGame || state.currentGame] =
-        payload.score;
+      state.listScores[
+        payload.currentGame ? payload.currentGame - 1 : state.currentGame - 1
+      ] = payload.score;
     },
     setScoreAndNextGame: (state, { payload }) => {
-      state.listScores[payload.currentGame || state.currentGame] =
-        payload.score;
+      state.listScores[
+        payload.currentGame ? payload.currentGame - 1 : state.currentGame - 1
+      ] = payload.score;
       state.currentGame += 1;
     },
     resetGame: () => initialState,
