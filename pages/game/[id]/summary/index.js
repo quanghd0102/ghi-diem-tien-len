@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { Pane, Heading, Badge, Button, HeartIcon } from "evergreen-ui";
 import Lottie from "lottie-react";
-import { FacebookMessengerShareButton } from "react-share";
+import { FacebookMessengerShareButton, FacebookShareButton } from "react-share";
 import { appId } from "@/configs/fb";
 import { defaultDomain } from "@/configs";
 import Layout from "@/components/layout";
@@ -92,17 +92,7 @@ const GameSummary = () => {
         </div>
       </div>
       <div className="m-auto text-center">
-        <Pane>
-          <Heading size={100} marginTop={40} marginBottom={15}>
-            Made by QuangHD with love
-            <div className="flex justify-center mt-[10px]">
-              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
-              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
-              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
-            </div>
-          </Heading>
-        </Pane>
-        <div className="flex flex-col justify-center">
+        <div className="flex flex-col justify-center mt-[25px]">
           <FacebookMessengerShareButton
             appId={appId}
             url={`${defaultDomain}/game/${gameId}/final`}
@@ -129,18 +119,62 @@ const GameSummary = () => {
               </button>
             </div>
           </FacebookMessengerShareButton>
+          <FacebookShareButton
+            appId={appId}
+            quote="Thắng làm vua, thua trả tiền nước."
+            hashtag="#tienlen_ghidiem"
+            url={`${defaultDomain}/game/${gameId}/final`}
+          >
+            <div className="flex justify-center">
+              <button
+                type="button"
+                data-te-ripple-init
+                data-te-ripple-color="light"
+                className="w-[210px] mb-2 flex rounded px-6 py-2.5 text-xs font-medium uppercase leading-normal text-white shadow-md transition duration-150 ease-in-out hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg"
+                style={{ backgroundColor: "#1877f2" }}
+              >
+                <svg
+                  className="mr-2 h-3.5 w-3.5"
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
+                >
+                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                </svg>
+                Share to Facebook
+              </button>
+            </div>
+          </FacebookShareButton>
+          <div className="inline-flex items-center justify-center w-full">
+            <hr className="w-36 h-px my-8 bg-gray-200 border-0" />
+            <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 ">
+              or
+            </span>
+          </div>
           <Button
             appearance="primary"
             intent="success"
             width={210}
-            marginTop={15}
             onClick={onReset}
             className="m-auto"
             height={38}
+            marginBottom={25}
           >
             Bắt đầu lại những ván mới
           </Button>
         </div>
+        <Pane>
+          <Heading size={100} marginBottom={15}>
+            Made by QuangHD with love
+            <div className="flex justify-center mt-[10px]">
+              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
+              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
+              <HeartIcon color="danger" marginRight={4} marginLeft={4} />
+            </div>
+          </Heading>
+        </Pane>
       </div>
     </Layout>
   );
