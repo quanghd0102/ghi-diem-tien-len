@@ -81,6 +81,10 @@ export const gameSlice = createSlice({
       setIsEndedGameToFirebase(state.gameId);
     },
     resetGame: () => initialState,
+    setGameData: (state, { payload }) => ({
+      ...initialState,
+      ...payload,
+    }),
   },
 });
 
@@ -94,6 +98,7 @@ export const {
   setScoreAndNextGame,
   resetGame,
   setEndGame,
+  setGameData,
 } = gameSlice.actions;
 
 export default gameSlice.reducer;
