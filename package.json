@@ -24,9 +24,11 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
+    "react-share": "^4.4.1",
     "redux-persist": "^6.0.0",
     "reselect": "^4.1.7",
     "styled-components": "^5.3.9",
+    "tw-elements": "^1.0.0-beta1",
     "uuid": "^9.0.0"
   },
   "devDependencies": {
