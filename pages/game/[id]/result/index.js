@@ -14,7 +14,7 @@ import find from "lodash/find";
 import map from "lodash/map";
 import toSafeInteger from "lodash/toSafeInteger";
 import Layout from "@/components/layout";
-import { setScoreAndNextGame } from "../../../../redux/game";
+import { setScoreAndNextGame, setEndGame } from "../../../../redux/game";
 import { selectCurrentScore } from "../../../../redux/game/selector";
 
 const Game = () => {
@@ -70,6 +70,7 @@ const Game = () => {
   const goToEndGame = () => {
     setIsShown(false);
     setScoreToRedux();
+    dispatch(setEndGame());
     router.push(`/game/${gameId}/summary`);
   };
 

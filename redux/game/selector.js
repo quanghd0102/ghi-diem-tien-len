@@ -12,7 +12,8 @@ const selectListPlayers = (state) => state.game.listPlayers;
 export const selectCurrentScore = createSelector(
   selectCurrentGame,
   selectListScore,
-  (currentGame, listScore) => listScore[currentGame ? currentGame - 1 : 0] || []
+  (currentGame, listScore) =>
+    listScore?.[currentGame ? currentGame - 1 : 0]?.scores || []
 );
 
 export const selectSummaryScore = createSelector(
@@ -22,10 +23,13 @@ export const selectSummaryScore = createSelector(
     const summary = listPlayers.map((player) => {
       const summaryScore = reduce(
         listScore,
-        (sum, scores) => {
-          if (!scores) return sum;
+        (sum, scoresData) => {
+          if (!scoresData) return sum;
 
-          const tempPlayer = find(scores, (score) => score.id === player.id);
+          const tempPlayer = find(
+            scoresData.scores,
+            (score) => score.id === player.id
+          );
 
           if (!tempPlayer) return sum;
 
@@ -40,8 +44,8 @@ export const selectSummaryScore = createSelector(
 );
 
 export const selectScoreTable = createSelector(selectListScore, (listScore) =>
-  map(listScore, (scores, index) => ({
-    ...keyBy(scores, "id"),
-    key: index + 1,
+  map(listScore, (scoresData) => ({
+    ...keyBy(scoresData.scores, "id"),
+    key: scoresData.gameNumber + 1,
   }))
 );

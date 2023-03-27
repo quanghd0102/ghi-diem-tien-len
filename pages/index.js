@@ -2,12 +2,13 @@ import Head from "next/head";
 import Lottie from "lottie-react";
 import { Button } from "evergreen-ui";
 import { useRouter } from "next/navigation";
-
+import useEndedGame from "@/customHooks/useEndedGame";
 import logoAnimation from "../assets/lottie-files/logo.json";
 import titleImg from "@/assets/images/title.jpg";
 
 export default function Home() {
   const router = useRouter();
+  useEndedGame();
 
   const gotoNewGame = () => {
     router.push("/game");

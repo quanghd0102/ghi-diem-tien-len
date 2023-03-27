@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Head from "next/head";
 import { store, persistor } from "../redux/store";
+import "../configs/firebase";
 
 export default function App({ Component, pageProps }) {
   return (
