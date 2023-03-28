@@ -59,7 +59,13 @@ const Layout = ({ children, footer, isHideScoreTable = false }) => {
             <Heading size={600}>Bảng điểm</Heading>
           </Pane>
         </Pane>
-        <Pane flex="1" overflowY="scroll" background="tint1" padding={16}>
+        <Pane
+          flex="1"
+          overflowY="scroll"
+          background="tint1"
+          padding={16}
+          paddingBottom={50}
+        >
           <Table>
             <Table.Head className="!pr-0">
               <Table.TextHeaderCell className="min-w-[120px]" />
