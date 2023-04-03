@@ -7,6 +7,7 @@ import {
   Alert,
   Dialog,
 } from "evergreen-ui";
+import store from "store2";
 import { useRouter } from "next/navigation";
 import { useSelector, useDispatch } from "react-redux";
 import compact from "lodash/compact";
@@ -30,6 +31,9 @@ const Game = () => {
     if (currentGameId) {
       setIsShownContinueDialog(true);
     }
+    if (store.has("listNewPlayer")) {
+      setListPlayer(store.get("listNewPlayer"));
+    }
   }, []);
 
   const gotoNewGame = () => {
@@ -42,6 +46,7 @@ const Game = () => {
     const gameId = uuidv4();
     setIsInvalid(false);
     dispatch(setPlayersAndStartGame({ listNewPlayer, gameId }));
+    store.set("listNewPlayer", listNewPlayer);
     router.push(`/game/${gameId}`);
   };
 
