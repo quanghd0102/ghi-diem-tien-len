@@ -21,15 +21,10 @@ const GameSummary = () => {
   const currentGame = useSelector((state) => state.game.currentGame);
   const gameId = useSelector((state) => state.game.gameId);
   const summaryScore = useSelector((state) => selectSummaryScore(state));
-  const [listWinner, setListWinner] = useState([]);
 
   useEffect(() => {
     if (!currentGame) router.push("/game");
   }, []);
-
-  const onSetWinner = (playerId) => () => {
-    setListWinner([...listWinner, playerId]);
-  };
 
   const onReset = () => {
     dispatch(resetGame());
@@ -48,7 +43,7 @@ const GameSummary = () => {
       </Pane>
       <div>
         <div className="grid grid-cols-2 gap-x-4 gap-y-[50px] place-content-center h-full">
-          {summaryScore.map((player, index) => (
+          {summaryScore.map((player) => (
             <div className="relative" key={player.id}>
               <Badge
                 color={player.color}
@@ -61,20 +56,19 @@ const GameSummary = () => {
                   fontSize: "30px",
                   minHeight: "135px",
                 }}
-                onClick={onSetWinner(player.id)}
               >
                 <div className="flex flex-col justify-items-center mb-[-50px]">
                   <div className="absolute left-0 right-0 top-[-35px]">
-                    {index === 0 && (
+                    {player.order === 1 && (
                       <Lottie animationData={icon1st} style={{ height: 100 }} />
                     )}
-                    {index === 1 && (
+                    {player.order === 2 && (
                       <Lottie animationData={icon2nd} style={{ height: 100 }} />
                     )}
-                    {index === 2 && (
+                    {player.order === 3 && (
                       <Lottie animationData={icon3rd} style={{ height: 100 }} />
                     )}
-                    {index === 3 && (
+                    {player.order === -1 && (
                       <Lottie
                         animationData={iconLoser}
                         style={{ height: 100 }}
@@ -153,6 +147,22 @@ const GameSummary = () => {
               or
             </span>
           </div>
+          <div className="center">
+            <a
+              href="https://donate.quanghd.me"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Button
+                className="m-auto"
+                width={210}
+                marginBottom={15}
+                intent="success"
+              >
+                Ủng hộ nhà phát triển ^^
+              </Button>
+            </a>
+          </div>
           <Button
             appearance="primary"
             intent="success"
@@ -164,6 +174,23 @@ const GameSummary = () => {
           >
             Bắt đầu lại những ván mới
           </Button>
+        </div>
+
+        <div className="center w-full h-[120px]">
+          <script
+            async
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3461417137839639"
+            crossOrigin="anonymous"
+          />
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-3461417137839639"
+            data-ad-slot="9618625057"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          />
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
         </div>
         <Pane>
           <Heading size={100} marginBottom={15}>

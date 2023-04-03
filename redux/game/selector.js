@@ -39,7 +39,27 @@ export const selectSummaryScore = createSelector(
       );
       return { ...player, summaryScore };
     });
-    return sortBy(summary, (player) => -player.summaryScore);
+    const sortedPlayer = sortBy(summary, (player) => -player.summaryScore);
+    const loserScore = sortedPlayer[3]?.summaryScore || 0;
+    const listSummaryPlayers = map(sortedPlayer, (player, index) => {
+      if (index === 0) {
+        if (player.summaryScore === loserScore) {
+          player.order = -1;
+        } else player.order = 1;
+      } else {
+        const prePlayer = sortedPlayer[index - 1];
+        if (player.summaryScore === loserScore) {
+          player.order = -1;
+        } else if (player.summaryScore === prePlayer.summaryScore) {
+          player.order = prePlayer.order;
+        } else {
+          player.order = prePlayer.order + 1;
+        }
+      }
+
+      return player;
+    });
+    return listSummaryPlayers;
   }
 );
 
