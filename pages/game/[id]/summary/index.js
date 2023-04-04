@@ -7,6 +7,7 @@ import { FacebookMessengerShareButton, FacebookShareButton } from "react-share";
 import { appId } from "@/configs/fb";
 import { defaultDomain } from "@/configs";
 import Layout from "@/components/layout";
+import GoogleAds from "@/components/Ads";
 import { resetGame } from "../../../../redux/game";
 import { selectSummaryScore } from "../../../../redux/game/selector";
 import iconTrophy from "@/assets/lottie-files/trophy-winner.json";
@@ -177,20 +178,7 @@ const GameSummary = () => {
         </div>
 
         <div className="center w-full h-[120px]">
-          <script
-            async
-            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3461417137839639"
-            crossOrigin="anonymous"
-          />
-          <ins
-            className="adsbygoogle"
-            style={{ display: "block" }}
-            data-ad-client="ca-pub-3461417137839639"
-            data-ad-slot="9618625057"
-            data-ad-format="auto"
-            data-full-width-responsive="true"
-          />
-          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+          <GoogleAds />
         </div>
         <Pane>
           <Heading size={100} marginBottom={15}>
